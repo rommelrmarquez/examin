@@ -1,0 +1,18 @@
+[
+{
+    "model": "trades.ordertype",
+    "pk": 1,
+    "fields": {
+        "action": "Buy shares",
+        "code": "BUY"
+    }
+},
+{
+    "model": "trades.ordertype",
+    "pk": 2,
+    "fields": {
+        "action": "Sell shares",
+        "code": "SELL"
+    }
+}
+]

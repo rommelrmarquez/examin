@@ -1,0 +1,20 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$216000$67B77olToY00$W47SFONAZXMT8SB2EaqOs0Zqd5ZqkCs6QtXPTXrOXzc=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "flex",
+        "first_name": "",
+        "last_name": "",
+        "email": "flex@email.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-10-10T08:03:56.658Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

@@ -1,0 +1,13 @@
+# editors
+*.vscode
+*.DS_Store
+
+# migration files
+**/migrations/**
+
+# db
+*.db
+*.sqlite3
+
+# pycache
+__pycache__/

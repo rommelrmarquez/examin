@@ -1,0 +1,26 @@
+[
+{
+    "model": "trades.stock",
+    "pk": 1,
+    "fields": {
+        "name": "Apple Inc.",
+        "code": "AAPL"
+    }
+},
+{
+    "model": "trades.stock",
+    "pk": 2,
+    "fields": {
+        "name": "Alphabet Inc",
+        "code": "GOOG"
+    }
+},
+{
+    "model": "trades.stock",
+    "pk": 3,
+    "fields": {
+        "name": "Berkshire Hathaway Inc.",
+        "code": "BRK.A"
+    }
+}
+]

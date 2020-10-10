@@ -1,0 +1,26 @@
+[
+{
+    "model": "trades.orderstatus",
+    "pk": 1,
+    "fields": {
+        "code": "FILLED",
+        "description": "Orders are completed"
+    }
+},
+{
+    "model": "trades.orderstatus",
+    "pk": 2,
+    "fields": {
+        "code": "FAILED",
+        "description": "Orders failed"
+    }
+},
+{
+    "model": "trades.orderstatus",
+    "pk": 3,
+    "fields": {
+        "code": "PARTIAL",
+        "description": "Orders are partially filled"
+    }
+}
+]
