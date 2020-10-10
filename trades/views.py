@@ -14,7 +14,9 @@ from strader.utils import constants
 
 class OrderViewSet(mixins.ListModelMixin, mixins.CreateModelMixin,
                    mixins.RetrieveModelMixin, viewsets.GenericViewSet):
-    """API for selling, buying, and listing orders"""
+    """
+        API for selling, buying, and listing orders
+    """
 
     model = Order
     queryset = Order.objects.all()

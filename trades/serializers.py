@@ -19,7 +19,7 @@ class OrderListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        exclude = ('account', 'id',)
+        exclude = ('account', )
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -34,7 +34,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        exclude = ('account', )
+        exclude = ('account',)
 
     def compute_total_value(self, order):
         """
