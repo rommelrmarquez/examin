@@ -15,7 +15,22 @@ from strader.utils import constants
 class OrderViewSet(mixins.ListModelMixin, mixins.CreateModelMixin,
                    mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
-        API for selling, buying, and listing orders
+        API for listing placed orders (GET)
+        and placing sell or buy orders (POST)
+
+    - Parameters:
+        (GET)
+            - `stock` str (optional) filter the list by stock code
+            - `order_type` str (optional) filter the list by order type
+                                Possible values: BUY, SELL
+            - `stock_name` str (optional) filter the list by stock name
+
+        (POST)
+            `data` dict-like object containing:
+                - `stock` str (required) stock code
+                - `quantity` float (required) number of shares
+                - `price` float (required) desired price for the order
+                - `order_type` str (required) BUY or SELL
     """
 
     model = Order
@@ -27,6 +42,9 @@ class OrderViewSet(mixins.ListModelMixin, mixins.CreateModelMixin,
 
     def get_queryset(self):
         """Override to get corresponding order of a user"""
+
+        if getattr(self, 'swagger_fake_view', False):
+            return Order.objects.none()
 
         account = self.request.user.account
         return Order.objects.filter(account=account)
@@ -56,13 +74,11 @@ class OrderSummaryViewSet(viewsets.GenericViewSet):
         """
             Compute total value invested.
 
-        @Params
-            order_type: str
-                        BUY or SELL
-            stock: str (default: None)
-                   Use to filter specific stock
+        - Parameters:
+            - `order_type` str BUY or SELL
+            - `stock` str (default: None) Use to filter specific stock
 
-        @Return
+        - Return:
             total invested value
         """
 
@@ -78,7 +94,13 @@ class OrderSummaryViewSet(viewsets.GenericViewSet):
         return q['total'] or 0.0
 
     def list(self, request, *args, **kwargs):
-        """Return the total order value"""
+        """
+        API for the total value invested by a user. The order summary can be
+        filtered by specific stock.
+
+        - Parameters:
+            - `stock` str (optional) filter the summary by stock code
+        """
 
         stock = request.GET.get('stock', None)
         if stock:
@@ -92,7 +114,7 @@ class OrderSummaryViewSet(viewsets.GenericViewSet):
 
 class StockShareSummaryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
-        API for the stock that a user currently has
+        API for the total value a user in their portfolio.
     """
 
     model = StockShare
@@ -103,11 +125,21 @@ class StockShareSummaryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         """Override to get corresponding shares of a user"""
 
+        if getattr(self, 'swagger_fake_view', False):
+            return Order.objects.none()
+
         account = self.request.user.account
         return StockShare.objects.filter(account=account, total_value__gt=0)
 
     def list(self, request, scope=None):
-        """Override method to handle summary of user's current stock shares"""
+        """
+        API for the total value a user in their portfolio.
+
+        - Parameters
+            - `scope` str Possible values: `summary` or `all`
+            If scope == summary, return the total value in user's portfolio,
+            If scope == all, return the list of stocks shares the user own.
+        """
 
         qs = self.get_queryset()
         if scope == 'summary':
