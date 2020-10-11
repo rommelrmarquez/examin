@@ -26,11 +26,18 @@ class OrderSerializer(serializers.ModelSerializer):
     """Serializer for creating orders"""
 
     stock = serializers.SlugRelatedField(queryset=Stock.objects.all(),
-                                         slug_field='code')
+                                         slug_field='code',
+                                         help_text='Stock code')
     order_type = serializers.SlugRelatedField(queryset=OrderType.objects.all(),
-                                              slug_field='code')
-    total_value = serializers.FloatField(required=False)
-    status = serializers.CharField(source='status.code', required=False)
+                                              slug_field='code',
+                                              help_text='BUY or SELL')
+    total_value = serializers.FloatField(required=False,
+                                         help_text='auto-generated')
+    status = serializers.CharField(source='status.code', required=False,
+                                   help_text='auto-generated')
+    quantity = serializers.FloatField(required=True,
+                                      help_text='Number of shares')
+    price = serializers.FloatField(required=True, help_text='Stock price')
 
     class Meta:
         model = Order

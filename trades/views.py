@@ -15,8 +15,7 @@ from strader.utils import constants
 class OrderViewSet(mixins.ListModelMixin, mixins.CreateModelMixin,
                    mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
-        API for listing placed orders (GET)
-        and placing sell or buy orders (POST)
+    API for listing placed orders (GET) and placing sell or buy orders (POST)
 
     - Parameters:
         (GET)
@@ -74,11 +73,11 @@ class OrderSummaryViewSet(viewsets.GenericViewSet):
         """
             Compute total value invested.
 
-        - Parameters:
+        Parameters:
             - `order_type` str BUY or SELL
             - `stock` str (default: None) Use to filter specific stock
 
-        - Return:
+        Return:
             total invested value
         """
 
