@@ -1,5 +1,8 @@
 # Strader
-This repo contains the code for the exam.
+Strader contains:
+ - Endpoint to let users place trades. Quantity of the stock the user wants to buy or sell is recorded.
+ - Endpoint to retrieve total value invested in a single stock by user.
+ - Endpoint to retrieve the total value invested by user in his/her account.
 
 
 # Initial setup (local)
